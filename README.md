@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6d2f1a7f-97fb-42b2-9587-da6c829fa88c/deploy-status)](https://app.netlify.com/sites/basil-inventory/deploys)
+
 # Inventory
 
 > My remarkable Nuxt.js project
