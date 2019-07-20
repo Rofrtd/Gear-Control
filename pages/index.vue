@@ -6,7 +6,7 @@
         Inventory
       </h1>
       <h2 class="subtitle">
-        My remarkable Nuxt.js project
+        Basil V.R Greatrex
       </h2>
       <div class="links">
         <a href="https://nuxtjs.org/" target="_blank" class="button--green">
