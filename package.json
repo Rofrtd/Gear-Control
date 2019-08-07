@@ -23,9 +23,11 @@
   "homepage": "https://github.com/Rofrtd/Gear-Control#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "formik": "^1.5.8",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": "^5.0.1",
+    "yup": "^0.27.0"
   },
   "devDependencies": {
     "nodemon": "^1.19.1",
