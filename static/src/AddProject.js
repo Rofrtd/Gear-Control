@@ -18,13 +18,11 @@ export default function AddProject (){
             validationSchema={ProjectSchema}
             onSubmit={(values) => console.log(values)}
         >
-            {() => (
-                <Form>
-                    <Field name="name" />
-                    <ErrorMessage name="name" />
-                    <button type="submit">Submit</button>
-                </Form>
-            )}
+            <Form>
+                <Field name="name" />
+                <ErrorMessage name="name" />
+                <button type="submit">Submit</button>
+            </Form>
         </Formik>
     )
 }
