@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "parcel build static/index.html -- -d public",
+    "build-watch": "parcel watch static/index.html -- -d public",
+    "parcel": "parcel",
     "start": "node index.js",
-    "start:dev": "nodemon index.js",
+    "start-dev": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -20,6 +23,15 @@
   "homepage": "https://github.com/Rofrtd/Gear-Control#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "nodemon": "^1.19.1"
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1",
+    "parcel-bundler": "^1.12.3"
+  },
+
+  "nodemonConfig": {
+    "ignore": ["public/*", "static/*"]
   }
 }
