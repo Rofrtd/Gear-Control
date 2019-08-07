@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "parcel build static/index.html -- -d public",
-    "build-watch": "parcel watch static/index.html -- -d public",
+    "build": "parcel build static/index.html -d public",
+    "build-watch": "parcel watch static/index.html -d public",
     "parcel": "parcel",
     "start": "node index.js",
     "start-dev": "nodemon index.js",
