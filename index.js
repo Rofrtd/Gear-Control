@@ -9,13 +9,9 @@ app.post('/api/add-project', (req, res) => {
     res.json({test: "test123"});
 })
 
-app.use((req, res) => {
-    if (req.get('Content-Type') === 'application/json') {
-        res.status(404).send({ message: 'Not found' });
-    } else {
-        // falls back to index.html so that the SPA can handle 404
-        res.sendFile(path.join(__dirname, 'public', 'index.html'))
-    }
+app.get(/^((?!\/api).)*$/, (req, res) => {
+    //falls back 404 to index.html so that SPA handles 404 pages
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
