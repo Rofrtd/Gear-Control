@@ -16,7 +16,14 @@ export default function AddProject (){
                 name: ''
             }}
             validationSchema={ProjectSchema}
-            onSubmit={(values) => console.log(values)}
+            onSubmit={
+                (values) => fetch('/api/add-project', {
+                    method: 'POST', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(values), 
+                })}
         >
             <Form>
                 <Field name="name" />

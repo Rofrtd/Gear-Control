@@ -5,6 +5,10 @@ const port = 3000
 
 app.use(express.static('public'))
 
+app.post('/api/add-project', (req, res) => {
+    res.json({test: "test123"});
+})
+
 app.use((req, res) => {
     if (req.get('Content-Type') === 'application/json') {
         res.status(404).send({ message: 'Not found' });
