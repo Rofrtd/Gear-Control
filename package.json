@@ -22,11 +22,14 @@
   },
   "homepage": "https://github.com/Rofrtd/Gear-Control#readme",
   "dependencies": {
+    "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "formik": "^1.5.8",
+    "pg": "^7.12.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.1",
+    "uuid": "^3.3.2",
     "yup": "^0.27.0"
   },
   "devDependencies": {
