@@ -6,8 +6,12 @@ const port = 3000
 app.use(express.static('public'))
 
 app.use((req, res) => {
-    // falls back 404 to index.html
-    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+    if (req.get('Content-Type') === 'application/json') {
+        res.status(404).send({ message: 'Not found' });
+    } else {
+        // falls back to index.html so that the SPA can handle 404
+        res.sendFile(path.join(__dirname, 'public', 'index.html'))
+    }
 })
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
