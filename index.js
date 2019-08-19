@@ -13,6 +13,10 @@ const pool = new Pool({
 app.use(express.static('public'))
 app.use(bodyParser.json())
 
+app.get('/api/projects', async (req, res) => {
+    res.json((await pool.query("SELECT * FROM projects")).rows)
+});
+
 app.post('/api/add-project', async (req, res) => {
    try {
         await pool.query({
