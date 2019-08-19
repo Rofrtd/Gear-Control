@@ -9,21 +9,29 @@ const ProjectSchema = Yup.object().shape({
         .required("Required!")
 })
 
-export default function AddProject (){
+function onSubmit (history) {
+    return async (values) => {
+        const response = await fetch('/api/add-project', {
+            method: 'POST', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values)
+        })
+        if(response.ok){
+            history.push("/")
+        }
+    }
+}
+
+export default function AddProject (props){
     return (
         <Formik 
             initialValues={{
                 name: ''
             }}
             validationSchema={ProjectSchema}
-            onSubmit={
-                (values) => fetch('/api/add-project', {
-                    method: 'POST', 
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(values), 
-                })}
+            onSubmit={onSubmit(props.history)}
         >
             <Form>
                 <Field name="name" />
