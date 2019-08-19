@@ -15,15 +15,15 @@ app.use(bodyParser.json())
 
 app.post('/api/add-project', async (req, res) => {
    try {
-        const result = await pool.query({
+        await pool.query({
             text: 'INSERT INTO projects(id, name, created_on) VALUES($1, $2 , NOW())',
             values: [uuidv1(), req.body.name]
         })
     
-        res.json({test: "testRES"});     
+        res.json({ message: "OK" });
    } catch(error){   
         console.log(error)
-        res.status(500).json({msg: error.message})
+        res.status(500).json({ message: error.message })
    }
 })
 

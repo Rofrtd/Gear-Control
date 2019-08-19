@@ -18,8 +18,12 @@ function onSubmit (history) {
             },
             body: JSON.stringify(values)
         })
+
         if(response.ok){
             history.push("/")
+        } else {
+            console.log(await response.json());
+            alert("Project not added!")
         }
     }
 }
