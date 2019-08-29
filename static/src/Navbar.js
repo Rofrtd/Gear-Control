@@ -32,9 +32,6 @@ export default function Navbar() {
                     <div className="navbar-item">
                         <Link to="/" className="navbar-item">Users</Link>
                     </div>
-                    <div className="navbar-item">
-                        <Link to="/" className="navbar-item">Reports</Link>
-                    </div>
                 </div> 
             </nav>
     )
