@@ -1,3 +1,10 @@
 language: node_js
 node_js:
   - 10
+deploy:
+  provider: heroku
+  api_key:
+    secure: jtGIZmkS+KtFSxyHXyj1e3PWngLAjbwz6I8guYZgO1mpuIUehg40q/3ppN5/iivLZfya3dYc3tbyvWrLwb4gFijZZXl1EfyDzLnu9gK4mVYFLVkDQFBeRXo5T96QyIZipWEprVKtppOh8HSCMxNlRyDwnyHjzUs32ie5tYas7ScfPXGg0H2yQouFZzFMV3neeXKu9np0e+BXh2QB9VDF+P4LXwgndgLc37cCQuh83zGgX7WS6xYlQvc049vuEyCU4lCBfzySUgw4nyL3OmHrQ5Ip5fJKVh5Ml6lVdJVCC8fOfK5NO9ZE76O5CtExYD3XT6QDNlIq29XQ5320Jk1zzZdRpAYZbSBIcJCym7M/8qQlqFW5Ta8+XFZ5nDxLbC67dzNf8Xo1aQ9jHe3t7S9V4C2Qeuf94lBd+MO9ESQhBryBVKtT4yagYvLueT2Antm98sftktUYaBQ18bWa4G32OMdcXZilZS6bCFH+qt01kc5dZOYSv3fwdWNcNwc6NMQcwQwfUZaJ8lRSTJsr4GSMB/Ao4Plr2NBCtJFxmGJYrDvq9NXZvaRlP28kj+sSuNRY+cDxLj0BIFYTLYqMPZr8a9p3evBHWWefh+ZEVwbrz+9mucpc7OYP74ci9sd2UIagQ0DaKR/3MzV/IoMZiV/bZjk3vww1+/z2OJrUqU75i/4=
+  app: gear-control
+  on:
+    repo: Rofrtd/Gear-Control
