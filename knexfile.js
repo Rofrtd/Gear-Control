@@ -8,7 +8,7 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: 'postgresql://???:???@???:5432/gear-control',
+    connection: process.env.DATABASE_URL,
     migrations: {
       tableName: 'migrations'
     }

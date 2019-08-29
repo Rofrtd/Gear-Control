@@ -7,7 +7,7 @@ const bodyParser = require('body-parser')
 
 const knex = require('knex')({
     client: 'pg',
-    connection: 'postgresql://postgres:@localhost:5432/gear-control'
+    connection: process.env.DATABASE_URL || 'postgresql://postgres:@localhost:5432/gear-control'
 })
 
 app.use(express.static('public'))
