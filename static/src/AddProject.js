@@ -1,6 +1,7 @@
 import React from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
+import { Link } from 'react-router-dom'
 
 const ProjectSchema = Yup.object().shape({
     name: Yup.string()
@@ -30,6 +31,7 @@ function onSubmit (history) {
 
 export default function AddProject (props){
     return (
+        <div>
         <Formik 
             initialValues={{
                 name: ''
@@ -41,7 +43,10 @@ export default function AddProject (props){
                 <Field name="name" />
                 <ErrorMessage name="name" />
                 <button type="submit">Submit</button>
+                <Link to="/add-customer" className="button is-link is-small">Add Customer</Link>
             </Form>
         </Formik>
+        
+        </div>
     )
 }

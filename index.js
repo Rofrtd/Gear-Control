@@ -32,6 +32,25 @@ app.post('/api/add-project', async (req, res) => {
    }
 })
 
+app.get('/api/customers', async (req, res) => {
+    res.json((await knex('customers')))
+});
+
+app.post('/api/add-customer', async (req, res) => {
+    try {
+         await knex('customers').insert({
+             id: uuidv1(),
+             name: req.body.name,
+             created_on: 'NOW()'
+         })
+     
+         res.json({ message: "OK" });
+    } catch(error){   
+         console.log(error)
+         res.status(500).json({ message: error.message })
+    }
+ })
+
 app.get(/^((?!\/api).)*$/, (req, res) => {
     //falls back 404 to index.html so that SPA handles 404 pages
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
