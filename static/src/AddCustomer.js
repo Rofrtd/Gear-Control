@@ -53,7 +53,14 @@ export default function AddCustomer (props){
                     <button type="submit">Submit</button>
                 </Form>
             </Formik>
-            <table> 
+            <table className="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
                 <tbody>
                     {customers.map((customer) => (
                         <tr key={customer.id}>
