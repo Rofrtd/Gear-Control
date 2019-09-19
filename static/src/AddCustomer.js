@@ -20,7 +20,7 @@ function onSubmit (history) {
         })
 
         if(response.ok){
-            history.push("/add-customer")
+            history.push("/add-project")
         } else {
             console.log(await response.json());
             alert("Customer not added!")

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom'
-import AddCustomer from './AddCustomer'
 
 const ProjectSchema = Yup.object().shape({
     name: Yup.string()
@@ -53,7 +52,7 @@ export default function AddProject (props){
                 <ErrorMessage name="name" />
                 <div className="control">
                     <div name="name" className="select">
-                        <select >
+                        <select>
                             {customers.map((customer) =>(
                                 <option key={customer.id}>{customer.name}</option>
                             ))}
