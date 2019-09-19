@@ -50,16 +50,12 @@ export default function AddProject (props){
             <Form>
                 <Field name="name" placeholder="Project Name" />
                 <ErrorMessage name="name" />
-                <div className="control">
-                    <div name="name" className="select">
-                        <select>
-                            {customers.map((customer) =>(
-                                <option key={customer.id}>{customer.name}</option>
-                            ))}
-                        </select>
-                    </div>
-                    <Link to="/add-customer" className="button is-link is-small">Add Customer</Link>
-                </div>
+                <Field component="select" name="customer">
+                    {customers.map((customer) =>(
+                        <option key={customer.id}>{customer.name}</option>
+                    ))}
+                </Field>
+                <Link to="/add-customer" className="button is-link is-small">Add Customer</Link>
                 <button type="submit">Submit</button>
             </Form>
         </Formik>
