@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {Formik, Form, Field, ErrorMessage} from "formik";
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom'
+import AddCustomer from './AddCustomer'
 
 const ProjectSchema = Yup.object().shape({
     name: Yup.string()
@@ -30,6 +31,14 @@ function onSubmit (history) {
 }
 
 export default function AddProject (props){
+    const [customers, setCustomers] = useState([])
+    useEffect(() => {
+        (async () => {
+            const response = await fetch('/api/customers')
+            setCustomers(await response.json())
+        })()
+    }, [true])
+
     return (
         <div>
         <Formik 
@@ -40,13 +49,21 @@ export default function AddProject (props){
             onSubmit={onSubmit(props.history)}
         >
             <Form>
-                <Field name="name" />
+                <Field name="name" placeholder="Project Name" />
                 <ErrorMessage name="name" />
+                <div className="control">
+                    <div name="name" className="select">
+                        <select >
+                            {customers.map((customer) =>(
+                                <option key={customer.id}>{customer.name}</option>
+                            ))}
+                        </select>
+                    </div>
+                    <Link to="/add-customer" className="button is-link is-small">Add Customer</Link>
+                </div>
                 <button type="submit">Submit</button>
-                <Link to="/add-customer" className="button is-link is-small">Add Customer</Link>
             </Form>
         </Formik>
-        
         </div>
     )
 }
