@@ -1,11 +1,13 @@
 # Gear Control	
 [![Build Status](https://travis-ci.org/Rofrtd/Gear-Control.svg?branch=master)](https://travis-ci.org/Rofrtd/Gear-Control)
-
+[![Maintainability](https://api.codeclimate.com/v1/badges/91a5a64f9ae5512d06b2/maintainability)](https://codeclimate.com/github/Rofrtd/Gear-Control/maintainability)
 
 ## Summary
 :gear: Gear Control helps Project Managers to allocate resources shared across different projects. 
 
 :construction: [Work in progress](https://gear-control.herokuapp.com) :construction:
+
+**TODO**: Check codeclimate issues and write tests for the existing features.
 
 🔵🔵⚪️⚪️⚪️⚪️⚪️⚪️⚪️⚪️100%
 
