@@ -7,6 +7,8 @@ const ProjectSchema = Yup.object().shape({
     name: Yup.string()
         .min(2, "Too short!")
         .max(200, "Too long!")
+        .required("Required!"),
+    customer: Yup.string()
         .required("Required!")
 })
 
@@ -51,6 +53,7 @@ export default function AddProject (props){
                 <Field name="name" placeholder="Project Name" />
                 <ErrorMessage name="name" />
                 <Field component="select" name="customer">
+                    <option></option>
                     {customers.map((customer) =>(
                         <option key={customer.id}>{customer.name}</option>
                     ))}

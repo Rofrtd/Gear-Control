@@ -1,12 +1,3 @@
-<<<<<<< HEAD
-# Gear Control
-[![Build Status](https://travis-ci.org/Rofrtd/Gear-Control.svg?branch=master)](https://travis-ci.org/Rofrtd/Gear-Control)
-
-## Migrations
-
-    $ npx knex migrate:make migration_name # creating a new migration file
-    $ npx knex migrate:latest # migrate to latest version
-=======
 # Gear Control	
 [![Build Status](https://travis-ci.org/Rofrtd/Gear-Control.svg?branch=master)](https://travis-ci.org/Rofrtd/Gear-Control)
 [![Maintainability](https://api.codeclimate.com/v1/badges/91a5a64f9ae5512d06b2/maintainability)](https://codeclimate.com/github/Rofrtd/Gear-Control/maintainability)
@@ -73,4 +64,3 @@ The project is set to run CI/CD, so every merge to `master` is automatically dep
 
     $ npx knex migrate:make migration_name # creating a new migration file
     $ npx knex migrate:latest # migrate to latest version
->>>>>>> a3c0cb41c82c088f60152fd6c993215042749ee4

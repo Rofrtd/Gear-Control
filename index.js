@@ -22,7 +22,8 @@ app.post('/api/add-project', async (req, res) => {
         await knex('projects').insert({
             id: uuidv1(),
             name: req.body.name,
-            created_on: 'NOW()'
+            created_on: 'NOW()',
+            customer_id: req.body.customer
         })
     
         res.json({ message: "OK" });
