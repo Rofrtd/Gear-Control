@@ -22,6 +22,8 @@ export default function Home() {
                         <th>Name</th>
                         <th>Date</th>
                         <th>Customer</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,6 +33,8 @@ export default function Home() {
                             <td>{project.name}</td>
                             <td>{project.created_on}</td>
                             <td>{project.customer_id}</td>
+                            <td>{project.start_date}</td>
+                            <td>{project.end_date}</td>
                         </tr>
                     ))}
                 </tbody>
