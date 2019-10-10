@@ -42,7 +42,11 @@ app.post('/api/add-customer', async (req, res) => {
          await knex('customers').insert({
              id: uuidv1(),
              name: req.body.name,
-             created_on: 'NOW()'
+             created_on: 'NOW()',
+             country: req.body.country,
+             state: req.body.state,
+             street: req.body.street,
+             suburb: req.body.suburb
          })
      
          res.json({ message: "OK" });
