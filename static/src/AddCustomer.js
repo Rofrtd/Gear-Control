@@ -6,7 +6,10 @@ const ProjectSchema = Yup.object().shape({
     name: Yup.string()
         .min(2, "Too short!")
         .max(25, "Too long!")
-        .required("Required!")
+        .required("Required!"),
+    country: Yup.string().required("Required!"),
+    state: Yup.string().required("Required!"),
+    suburb: Yup.string().required("Required!"),
 })
 
 function onSubmit (history) {
@@ -42,14 +45,36 @@ export default function AddCustomer (props){
         <div>
             <Formik 
                 initialValues={{
-                    name: ''
+                    name: '',
+                    country: '',
+                    state: '',
+                    street: '',
+                    suburb: ''
                 }}
                 validationSchema={ProjectSchema}
                 onSubmit={onSubmit(props.history)}
             >
                 <Form>
-                    <Field name="name" />
+                    <Field name="name" placeholder="Customer Name"/>
                     <ErrorMessage name="name" />
+                    <Field component="select" name="country">
+                        <option></option>
+                        <option>Australia</option>
+                    </Field>
+                    <ErrorMessage name="country" />
+                    <Field component="select" name="state">
+                        <option></option>
+                        <option>NSW</option>
+                        <option>WA</option>
+                        <option>QLD</option>
+                        <option>SA</option>
+                        <option>VIC</option>
+                        <option>TAS</option>
+                    </Field>
+                    <ErrorMessage name="state" />
+                    <Field name="street" placeholder="Street Address"/>
+                    <Field name="suburb" placeholder="Suburb"/>
+                    <ErrorMessage name="suburb" />
                     <button type="submit">Submit</button>
                 </Form>
             </Formik>
@@ -59,6 +84,10 @@ export default function AddCustomer (props){
                         <th>ID</th>
                         <th>Name</th>
                         <th>Date</th>
+                        <th>Country</th>
+                        <th>State</th>
+                        <th>Street</th>
+                        <th>Suburb</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -67,6 +96,10 @@ export default function AddCustomer (props){
                             <td>{customer.id}</td>
                             <td>{customer.name}</td>
                             <td>{customer.created_on}</td>
+                            <td>{customer.country}</td>
+                            <td>{customer.state}</td>
+                            <td>{customer.street}</td>
+                            <td>{customer.suburb}</td>
                         </tr>
                     ))}
                 </tbody>
