@@ -23,7 +23,9 @@ app.post('/api/add-project', async (req, res) => {
             id: uuidv1(),
             name: req.body.name,
             created_on: 'NOW()',
-            customer_id: req.body.customer
+            customer_id: req.body.customer,
+            start_date: req.body.start_date,
+            end_date: req.body.end_date
         })
     
         res.json({ message: "OK" });
