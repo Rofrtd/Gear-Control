@@ -18,8 +18,8 @@
 - [x] Customer - Create
 - [x] Customer - List
 - [ ] Customer - Update
-- [ ] Project - List
-- [ ] Project - Create
+- [x] Project - List
+- [x] Project - Create
 - [ ] Project - Update
 - [ ] Resources - Create
 - [ ] Resources - Update
