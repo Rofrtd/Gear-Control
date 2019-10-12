@@ -27,7 +27,7 @@ export default function Navbar() {
                         </Link>
                     </div>
                     <div className="navbar-item">
-                        <Link to="/" className="navbar-item">Equipment</Link>
+                        <Link to="/add-equipment" className="navbar-item">Equipment</Link>
                     </div>
                     <div className="navbar-item">
                         <Link to="/" className="navbar-item">Users</Link>
