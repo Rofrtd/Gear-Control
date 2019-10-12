@@ -58,6 +58,31 @@ app.post('/api/add-customer', async (req, res) => {
     }
  })
 
+ app.get('/api/equipment', async (req, res) => {
+    res.json((await knex('equipment')))
+});
+
+app.post('/api/add-equipment', async (req, res) => {
+   try {
+        await knex('equipment').insert({
+            id: uuidv1(),
+            type: req.body.equipment_type,
+            model: req.body.equipment_model,
+            serial_number: req.body.equipment_serial_number,
+            internal_id: req.body.equipment_id,
+            last_calibration: req.body.equipment_last_calibration_date,
+            calibration_period: req.body.equipment_calibration_period,
+            notification: req.body.equipment_calibration_notification,
+            created_on: 'NOW()',
+        })
+    
+        res.json({ message: "OK" });
+   } catch(error){   
+        console.log(error)
+        res.status(500).json({ message: error.message })
+   }
+})
+
 app.get(/^((?!\/api).)*$/, (req, res) => {
     //falls back 404 to index.html so that SPA handles 404 pages
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
