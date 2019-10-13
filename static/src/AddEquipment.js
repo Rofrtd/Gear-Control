@@ -7,6 +7,25 @@ const ProjectSchema = Yup.object().shape({
         .min(2, "Too short!")
         .max(25, "Too long!")
         .required("Required!"),
+    equipment_model: Yup.string()
+        .min(2, "Too short!")
+        .max(25, "Too long!")
+        .required("Required!"),
+    equipment_serial_number: Yup.string()
+        .min(2, "Too short!")
+        .max(25, "Too long!")
+        .required("Required!"),
+    equipment_id: Yup.string()
+        .min(2, "Too short!")
+        .max(25, "Too long!")
+        .required("Required!"),
+    equipment_last_calibration_date: Yup.string()
+        .min(2, "Too short!")
+        .max(25, "Too long!")
+        .required("Required!"),
+    equipment_calibration_period: Yup.string()
+        .min(2)
+        .required("Select one!"),
 })
 
 function onSubmit (history) {
@@ -56,21 +75,28 @@ export default function AddEquipment (props){
                 <Form>
                     <label>Type:</label>
                     <Field name="equipment_type" placeholder="Type"/>
+                    <ErrorMessage name="equipment_type"/>
                     <label>Model:</label>
                     <Field name="equipment_model" placeholder="Model"/>
+                    <ErrorMessage name="equipment_model"/>
                     <label>S/N:</label>
                     <Field name="equipment_serial_number" placeholder="S/N"/>
+                    <ErrorMessage name="equipment_serial_number"/>
                     <label>ID:</label>
                     <Field name="equipment_id" placeholder="Equipment ID"/>
+                    <ErrorMessage name="equipment_id"/>
                     <label>Last Calibration:</label>
                     <Field type="date" name="equipment_last_calibration_date"/>
+                    <ErrorMessage name="equipment_last_calibration_date"/>
                     <label>Calibration Every</label>
                     <Field component="select" name="equipment_calibration_period">
+                        <option></option>
                         <option>6 months</option>
                         <option>12 months</option>
                         <option>18 months</option>
                         <option>24 months</option>
                     </Field>
+                    <ErrorMessage name="equipment_calibration_period"/>
                     <Field type="checkbox" name="equipment_calibration_notification"/>
                     <label> Receive calibration reminder</label>
                     <button type="submit">Submit</button>
