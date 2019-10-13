@@ -10,7 +10,7 @@ export default function Navbar() {
                         <img src={logo}/>
                     </Link>
 
-                    <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu">
+                    <a role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="true" data-target="navbar-menu">
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
                         <span aria-hidden="true"></span>
@@ -19,20 +19,12 @@ export default function Navbar() {
 
                 <div id="navbar-menu" className="navbar-menu">
                     <Link to="/" className="navbar-item">Home</Link>
-                </div>
-                <div className="navbar-end">
-                    <div className="navbar-item">
-                        <Link to="/" >
+                    <Link to="/add-equipment" className="navbar-item">Equipment</Link>
+                    <Link to="/" className="navbar-item">Users</Link>
+                    <Link to="/" className="navbar-item">
                             <i className="fas fa-bell"></i> 
-                        </Link>
-                    </div>
-                    <div className="navbar-item">
-                        <Link to="/add-equipment" className="navbar-item">Equipment</Link>
-                    </div>
-                    <div className="navbar-item">
-                        <Link to="/" className="navbar-item">Users</Link>
-                    </div>
-                </div> 
+                    </Link>
+                </div>
             </nav>
     )
 }
