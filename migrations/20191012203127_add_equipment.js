@@ -8,7 +8,7 @@ exports.up = function(knex) {
             table.text('internal_id').notNullable();
             table.date('last_calibration').notNullable();
             table.text('calibration_period').notNullable();
-            table.text('notification')
+            table.text('notification').notNullable().defaultTo('false');
             table.timestamp('created_on').defaultTo(knex.fn.now());
         })
 };
