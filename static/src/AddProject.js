@@ -53,23 +53,46 @@ export default function AddProject (props){
             onSubmit={onSubmit(props.history)}
         >
             <Form>
-                <Field name="name" placeholder="Project Name" />
-                <ErrorMessage name="name" />
-                <label>Customer:</label>
-                <Field component="select" name="customer">
-                    <option></option>
-                    {customers.map((customer) =>(
-                        <option key={customer.id}>{customer.name}</option>
-                    ))}
-                </Field>
-                <ErrorMessage name="customer" />
-                <Link to="/add-customer" className="button is-link is-small">Add Customer</Link>
-                <label>Start Date:</label>
-                <Field type="date" name="start_date" placeholder="Start Date" />
-                <ErrorMessage name="start_date" />
-                <label>End Date:</label>
-                <Field type="date" name="end_date" placeholder="End Date" />
-                <button type="submit">Submit</button>
+                <div className="field is-grouped">
+                    <div className="control">
+                        <label className="label">Project name:</label>
+                    </div>
+                    <div className="control">
+                        <Field name="name" className="field input" type="text" placeholder="Project Name" />
+                        <ErrorMessage name="name" />
+                    </div>
+                </div>
+                <div className="field is-grouped">
+                    <div className="control">
+                        <label className="label">Customer:</label>
+                    </div>
+                    <div className="field has-addons">
+                        <div className="control">
+                            <span className="select is-info is-small">
+                                <Field component="select" name="customer">
+                                    <option></option>
+                                    {customers.map((customer) =>(
+                                        <option key={customer.id}>{customer.name}</option>
+                                    ))}
+                                </Field>
+                            </span>
+                        </div>
+                        <div className="control">
+                            <Link to="/add-customer" className="button is-small">Add Customer</Link>
+                        </div>
+                    </div>
+                    <ErrorMessage name="customer" />
+                </div>
+                <div className="field is-grouped">
+                    <label className="label">Start Date:</label>
+                    <Field type="date" name="start_date" placeholder="Start Date" />
+                    <ErrorMessage name="start_date" />
+                </div>
+                <div className="field is-grouped">
+                    <label className="label">End Date:</label>
+                    <Field type="date" name="end_date" placeholder="End Date" />
+                </div>
+                <button type="submit" className="button is-info" >Submit</button>
             </Form>
         </Formik>
         </div>
