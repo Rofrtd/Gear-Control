@@ -72,7 +72,7 @@ export default function AddProject (props){
                                 <Field component="select" name="customer">
                                     <option></option>
                                     {customers.map((customer) =>(
-                                        <option key={customer.id}>{customer.name}</option>
+                                        <option value={customer.id} key={customer.id}>{customer.name}</option>
                                     ))}
                                 </Field>
                             </span>
