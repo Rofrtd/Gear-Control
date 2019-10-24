@@ -66,8 +66,8 @@ export default function AddEquipment (props){
                     equipment_serial_number: '',
                     equipment_id:'',
                     equipment_last_calibration_date: '',
-                    equipment_calibration_period: ''
-
+                    equipment_calibration_period: '',
+                    equipment_calibration_notification: false
                 }}
                 validationSchema={ProjectSchema}
                 onSubmit={onSubmit(props.history)}
