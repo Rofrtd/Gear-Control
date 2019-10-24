@@ -9,7 +9,7 @@
 
 **TODO**: Check codeclimate issues and write tests for the existing features.
 
-🔵🔵⚪️⚪️⚪️⚪️⚪️⚪️⚪️⚪️100%
+🔵🔵🔵⚪️⚪️⚪️⚪️⚪️⚪️⚪️100%
 
 - [x] Setup Project
 - [x] Setup CI
@@ -20,10 +20,11 @@
 - [ ] Customer - Update
 - [x] Project - List
 - [x] Project - Create
+- [ ] Project - Alocate Equipment
 - [ ] Project - Update
-- [ ] Resources - Create
-- [ ] Resources - Update
-- [ ] Resources Conflict Notification
+- [x] Equipment - Create
+- [ ] Equipment - Update
+- [ ] Equipment Conflict Notification
 - [ ] PM Login
 - [ ] Register DNS
 
