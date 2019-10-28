@@ -79,8 +79,8 @@ export default function AddEquipment (props){
                         </div>
                         <div className="control">
                             <Field name="equipment_type" className="field input" type="text" placeholder="Type"/>
-                            <ErrorMessage name="equipment_type"/>
                         </div>
+                        <ErrorMessage name="equipment_type"/>
                     </div>
                     <div className="field is-grouped">
                         <div className="control">
@@ -88,17 +88,17 @@ export default function AddEquipment (props){
                         </div>
                         <div className="control">
                             <Field name="equipment_model" className="field input" type="text" placeholder="Model"/>
-                            <ErrorMessage name="equipment_model"/>
                         </div> 
+                        <ErrorMessage name="equipment_model"/>
                     </div>
                     <div className="field is-grouped">
                         <div className="control">
                             <label className="label">S/N:</label>
                         </div>
                         <div className="control">
-                            <Field name="equipment_serial_number" className="field input" type="text" placeholder="S/N"/>
-                            <ErrorMessage name="equipment_serial_number"/>
-                        </div> 
+                            <Field name="equipment_serial_number" className="field input" type="text" placeholder="S/N"/> 
+                        </div>
+                        <ErrorMessage name="equipment_serial_number"/> 
                     </div>
                     <div className="field is-grouped">
                         <div className="control">
@@ -106,17 +106,17 @@ export default function AddEquipment (props){
                         </div>
                         <div className="control">
                             <Field name="equipment_id" className="field input" type="text" placeholder="Equipment ID"/>
-                            <ErrorMessage name="equipment_id"/>
                         </div> 
+                        <ErrorMessage name="equipment_id"/>
                     </div>
                     <div className="field is-grouped">
                         <div className="control">
                             <label className="label">Last Calibration:</label>
                         </div>
                         <div className="control">
-                            <Field type="date" className="field input" type="text" name="equipment_last_calibration_date"/>
-                            <ErrorMessage name="equipment_last_calibration_date"/>
-                        </div> 
+                            <Field type="date" className="field input" type="text" name="equipment_last_calibration_date"/>   
+                        </div>
+                        <ErrorMessage name="equipment_last_calibration_date"/> 
                     </div>
                     <div className="field is-grouped">
                         <div className="control">
@@ -129,7 +129,6 @@ export default function AddEquipment (props){
                                 <option>18 months</option>
                                 <option>24 months</option>
                             </Field>
-                            <ErrorMessage name="equipment_calibration_period"/>
                         </div> 
                     </div>
                     <div className="field is-grouped">
