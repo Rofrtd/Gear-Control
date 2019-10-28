@@ -66,42 +66,84 @@ export default function AddEquipment (props){
                     equipment_serial_number: '',
                     equipment_id:'',
                     equipment_last_calibration_date: '',
-                    equipment_calibration_period: '',
+                    equipment_calibration_period: '6 months',
                     equipment_calibration_notification: false
                 }}
                 validationSchema={ProjectSchema}
                 onSubmit={onSubmit(props.history)}
             >
                 <Form>
-                    <label>Type:</label>
-                    <Field name="equipment_type" placeholder="Type"/>
-                    <ErrorMessage name="equipment_type"/>
-                    <label>Model:</label>
-                    <Field name="equipment_model" placeholder="Model"/>
-                    <ErrorMessage name="equipment_model"/>
-                    <label>S/N:</label>
-                    <Field name="equipment_serial_number" placeholder="S/N"/>
-                    <ErrorMessage name="equipment_serial_number"/>
-                    <label>ID:</label>
-                    <Field name="equipment_id" placeholder="Equipment ID"/>
-                    <ErrorMessage name="equipment_id"/>
-                    <label>Last Calibration:</label>
-                    <Field type="date" name="equipment_last_calibration_date"/>
-                    <ErrorMessage name="equipment_last_calibration_date"/>
-                    <label>Calibration Every</label>
-                    <Field component="select" name="equipment_calibration_period">
-                        <option></option>
-                        <option>6 months</option>
-                        <option>12 months</option>
-                        <option>18 months</option>
-                        <option>24 months</option>
-                    </Field>
-                    <ErrorMessage name="equipment_calibration_period"/>
-                    <Field type="checkbox" name="equipment_calibration_notification"/>
-                    <label> Receive calibration reminder</label>
-                    <button type="submit">Submit</button>
+                    <div className="field is-grouped">
+                        <div className="control">
+                            <label className="label">Type:</label>
+                        </div>
+                        <div className="control">
+                            <Field name="equipment_type" className="field input" type="text" placeholder="Type"/>
+                            <ErrorMessage name="equipment_type"/>
+                        </div>
+                    </div>
+                    <div className="field is-grouped">
+                        <div className="control">
+                            <label className="label">Model:</label>
+                        </div>
+                        <div className="control">
+                            <Field name="equipment_model" className="field input" type="text" placeholder="Model"/>
+                            <ErrorMessage name="equipment_model"/>
+                        </div> 
+                    </div>
+                    <div className="field is-grouped">
+                        <div className="control">
+                            <label className="label">S/N:</label>
+                        </div>
+                        <div className="control">
+                            <Field name="equipment_serial_number" className="field input" type="text" placeholder="S/N"/>
+                            <ErrorMessage name="equipment_serial_number"/>
+                        </div> 
+                    </div>
+                    <div className="field is-grouped">
+                        <div className="control">
+                            <label className="label">ID:</label>
+                        </div>
+                        <div className="control">
+                            <Field name="equipment_id" className="field input" type="text" placeholder="Equipment ID"/>
+                            <ErrorMessage name="equipment_id"/>
+                        </div> 
+                    </div>
+                    <div className="field is-grouped">
+                        <div className="control">
+                            <label className="label">Last Calibration:</label>
+                        </div>
+                        <div className="control">
+                            <Field type="date" className="field input" type="text" name="equipment_last_calibration_date"/>
+                            <ErrorMessage name="equipment_last_calibration_date"/>
+                        </div> 
+                    </div>
+                    <div className="field is-grouped">
+                        <div className="control">
+                            <label className="label">Calibration Every:</label>
+                        </div>
+                        <div className="select">
+                            <Field component="select" name="equipment_calibration_period">
+                                <option>6 months</option>
+                                <option>12 months</option>
+                                <option>18 months</option>
+                                <option>24 months</option>
+                            </Field>
+                            <ErrorMessage name="equipment_calibration_period"/>
+                        </div> 
+                    </div>
+                    <div className="field is-grouped">
+                        <div className="checkbox">
+                            <Field type="checkbox" value="equipment_calibration_notification" name="equipment_calibration_notification"/>
+                        </div> 
+                        <div className="control">
+                            <label className="label">Receive calibration notification</label>
+                        </div>
+                    </div>
+                    <button className="button" type="submit">Submit</button>
                 </Form>
             </Formik>
+
             <table className="table">
                 <thead>
                     <tr>
