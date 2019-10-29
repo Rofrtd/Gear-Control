@@ -58,7 +58,8 @@ export default function AddEquipment (props){
     }, [true])
 
     return (
-        <div>
+        <div className="container">
+				<h1 className="title">ADD NEW EQUIPMENT</h1>
             <Formik 
                 initialValues={{
                     equipment_type: '',
@@ -73,77 +74,77 @@ export default function AddEquipment (props){
                 onSubmit={onSubmit(props.history)}
             >
                 <Form>
-                    <div className="field is-grouped">
-                        <div className="control">
-                            <label className="label">Type:</label>
-                        </div>
-                        <div className="control">
-                            <Field name="equipment_type" className="field input" type="text" placeholder="Type"/>
-                        </div>
-                        <ErrorMessage name="equipment_type"/>
+                    <div className="columns">
+						<div className="column">
+							<div className="columns level">
+								<label className="label column level-item">Type:</label>
+								<div className="control column level-item">
+									<Field name="equipment_type" className="field input" type="text" placeholder="Type"/>
+								</div>
+								<ErrorMessage name="equipment_type"/>
+							</div>
+							<div className="columns level">
+								<label className="label column level-item">Model:</label>
+								<div className="control column level-item">
+									<Field name="equipment_model" className="field input" type="text" placeholder="Model"/>
+								</div> 
+								<ErrorMessage name="equipment_model"/>
+							</div>
+							<div className="columns level">
+								<label className="label column level-item">S/N:</label>
+								<div className="control column level-item">
+									<Field name="equipment_serial_number" className="field input" type="text" placeholder="S/N"/> 
+								</div>
+								<ErrorMessage name="equipment_serial_number"/>
+							</div>
+							
+							<div className="columns level">
+								<label className="label column level-item">ID:</label>
+								<div className="control column level-item">
+									<Field name="equipment_id" className="field input" type="text" placeholder="Equipment ID"/>
+								</div> 
+								<ErrorMessage name="equipment_id"/>
+							</div>
+							
+						</div>
+
+						<div className="column">
+							<div className="columns level">
+								<label className="label column level-item">Last Calibration:</label>
+								<div className="control column level-item">
+									<Field type="date" className="field input" name="equipment_last_calibration_date"/>   
+								</div>
+								<ErrorMessage name="equipment_last_calibration_date"/> 
+							</div>
+
+							<div className="columns level">
+									<label className="label column level-item">Calibration Every:</label>
+								<div className="column level-item">
+									<div className="select">
+										<Field component="select" name="equipment_calibration_period">
+											<option>6 months</option>
+											<option>12 months</option>
+											<option>18 months</option>
+											<option>24 months</option>
+										</Field>
+									</div>
+								</div>
+									
+							</div>
+							<div className="columns level">
+								<div className="checkbox column level-item">
+									<Field type="checkbox" value="equipment_calibration_notification" name="equipment_calibration_notification"/>
+								</div> 
+								<label className="label column level-item">Receive calibration notification</label>
+							</div>
+						</div>
                     </div>
-                    <div className="field is-grouped">
-                        <div className="control">
-                            <label className="label">Model:</label>
-                        </div>
-                        <div className="control">
-                            <Field name="equipment_model" className="field input" type="text" placeholder="Model"/>
-                        </div> 
-                        <ErrorMessage name="equipment_model"/>
-                    </div>
-                    <div className="field is-grouped">
-                        <div className="control">
-                            <label className="label">S/N:</label>
-                        </div>
-                        <div className="control">
-                            <Field name="equipment_serial_number" className="field input" type="text" placeholder="S/N"/> 
-                        </div>
-                        <ErrorMessage name="equipment_serial_number"/> 
-                    </div>
-                    <div className="field is-grouped">
-                        <div className="control">
-                            <label className="label">ID:</label>
-                        </div>
-                        <div className="control">
-                            <Field name="equipment_id" className="field input" type="text" placeholder="Equipment ID"/>
-                        </div> 
-                        <ErrorMessage name="equipment_id"/>
-                    </div>
-                    <div className="field is-grouped">
-                        <div className="control">
-                            <label className="label">Last Calibration:</label>
-                        </div>
-                        <div className="control">
-                            <Field type="date" className="field input" type="text" name="equipment_last_calibration_date"/>   
-                        </div>
-                        <ErrorMessage name="equipment_last_calibration_date"/> 
-                    </div>
-                    <div className="field is-grouped">
-                        <div className="control">
-                            <label className="label">Calibration Every:</label>
-                        </div>
-                        <div className="select">
-                            <Field component="select" name="equipment_calibration_period">
-                                <option>6 months</option>
-                                <option>12 months</option>
-                                <option>18 months</option>
-                                <option>24 months</option>
-                            </Field>
-                        </div> 
-                    </div>
-                    <div className="field is-grouped">
-                        <div className="checkbox">
-                            <Field type="checkbox" value="equipment_calibration_notification" name="equipment_calibration_notification"/>
-                        </div> 
-                        <div className="control">
-                            <label className="label">Receive calibration notification</label>
-                        </div>
-                    </div>
-                    <button className="button" type="submit">Submit</button>
+                    
+                    <button className="button is-info" type="submit">Submit</button>
                 </Form>
             </Formik>
 
-            <table className="table">
+			<table className="table">
                 <thead>
                     <tr>
                         <th>ID</th>
