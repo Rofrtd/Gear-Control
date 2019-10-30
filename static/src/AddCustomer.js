@@ -46,8 +46,8 @@ export default function AddCustomer (props){
             <Formik 
                 initialValues={{
                     name: '',
-                    country: '',
-                    state: '',
+                    country: 'Australia',
+                    state: 'NSW',
                     street: '',
                     suburb: ''
                 }}
@@ -55,27 +55,62 @@ export default function AddCustomer (props){
                 onSubmit={onSubmit(props.history)}
             >
                 <Form>
-                    <Field name="name" placeholder="Customer Name"/>
-                    <ErrorMessage name="name" />
-                    <Field component="select" name="country">
-                        <option></option>
-                        <option>Australia</option>
-                    </Field>
-                    <ErrorMessage name="country" />
-                    <Field component="select" name="state">
-                        <option></option>
-                        <option>NSW</option>
-                        <option>WA</option>
-                        <option>QLD</option>
-                        <option>SA</option>
-                        <option>VIC</option>
-                        <option>TAS</option>
-                    </Field>
-                    <ErrorMessage name="state" />
-                    <Field name="street" placeholder="Street Address"/>
-                    <Field name="suburb" placeholder="Suburb"/>
-                    <ErrorMessage name="suburb" />
-                    <button type="submit">Submit</button>
+
+                <div className="columns">
+					<div className="column">
+						<div className="columns level">
+							<label className="label column level-item">Name:</label>
+							<div className="control column level-item">
+								<Field name="name" className="field input" type="text" placeholder="Customer Name"/>
+							</div>
+                            <ErrorMessage name="name" />
+                        </div>
+                        <div className="columns level">
+                            <label className="label column level-item">Country:</label>
+                            <div className="control column level-item">
+                                <div className="select">
+                                    <Field name="country" className="field input" type="text" component="select" >
+                                        <option>Australia</option>
+                                    </Field>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="columns level">
+                            <label className="label column level-item">State:</label>
+                            <div className="control column level-item">
+                                <div className="select">
+                                    <Field name="state" className="field input" type="text" component="select">
+                                        <option>NSW</option>
+                                        <option>WA</option>
+                                        <option>QLD</option>
+                                        <option>SA</option>
+                                        <option>VIC</option>
+                                        <option>TAS</option>
+                                    </Field>
+                                </div>
+                                <ErrorMessage name="state" />
+                            </div>
+                        </div>
+                        <div className="columns level">
+                            <label className="label column level-item">Sreet Address:</label>
+                            <div className="control column level-item">
+                                <Field name="street" className="field input" type="text" placeholder="Street Address"/>
+                            </div>
+                        </div>
+                        <div className="columns level">
+                            <label className="label column level-item">Suburb:</label>
+                            <div className="control column level-item">
+                                <Field name="suburb" className="field input" type="text" placeholder="Suburb"/>
+                            </div>
+                        </div>
+                        <ErrorMessage name="suburb" />
+                    </div>
+
+                    <div className="column">
+                        {/* EMPTY */}
+                    </div> 
+                </div>
+                <button className="button is-info" type="submit">Submit</button>
                 </Form>
             </Formik>
             <table className="table">
