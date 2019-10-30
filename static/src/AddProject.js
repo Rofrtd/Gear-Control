@@ -40,6 +40,14 @@ export default function AddProject (props){
         })()
     }, [true])
 
+    const [equipment, setEquipment] = useState([])
+    useEffect(() => {
+        (async () => {
+            const response = await fetch('/api/equipment')
+            setEquipment(await response.json())
+        })()
+    }, [true])
+
     return (
         <div className="container">
             <center>
@@ -50,7 +58,8 @@ export default function AddProject (props){
                 name: '',
                 customer:'',
                 start_date:'',
-                end_date: ''
+                end_date: '',
+                equipment: []
             }}
             validationSchema={ProjectSchema}
             onSubmit={onSubmit(props.history)}
@@ -96,17 +105,21 @@ export default function AddProject (props){
                             <Field type="date" name="end_date" className="field input" placeholder="End Date" />
                         </div>
                     </div>
-                        
 
-
+                    <div className="columns level">
+                        <label className="label column level-item">Allocate Equipment:</label>
+                        <div className="select is-multiple column level-item">
+                            <select multiple name="equipment" className="field input">
+                            {equipment.map((equipment) =>(
+                                    <option value={equipment.id} key={equipment.id}>{equipment.internal_id}</option>
+                                ))}
+                            </select>
+                        </div>
+                        {/* <ErrorMessage name="equipment"/> */}
+                    </div>
                 </div>
-                <div className="column"></div>
-
-
+                <div className="column"> {/* EMPTY */}</div>
             </div>           
-
-                
-                
                 <button type="submit" className="button is-info" >Submit</button>
             </Form>
         </Formik>
