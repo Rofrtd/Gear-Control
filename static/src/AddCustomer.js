@@ -42,7 +42,10 @@ export default function AddCustomer (props){
     }, [true])
 
     return (
-        <div>
+        <div className="container">
+            <center>
+                <h1 className="title">ADD NEW CUSTOMER</h1>
+            </center>
             <Formik 
                 initialValues={{
                     name: '',
