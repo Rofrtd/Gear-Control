@@ -13,7 +13,10 @@ export default function Home() {
     
     
     return (
-        <div>
+        <div className="container">
+            <center>
+                <h1 className="title">OPEN PROJECTS</h1>
+            </center>
             <div className="columns is-multiline"> 
                 {projects.map((project) => (
                         <div key={project.id} className = "column is-one-quarter is-half-tablet">
@@ -23,17 +26,11 @@ export default function Home() {
                                 </header>
                             <div className="card-content">
                                 <div className="content">
-                                    ID: {project.id} 
+                                    <strong>Customer:</strong> {project.customer_id} 
                                     <br/>
-                                    NAME: {project.name}
+                                    <strong>START DATE:</strong> {project.start_date.slice(0, 10)}
                                     <br/>
-                                    CREATED ON: {project.created_on}
-                                    <br/>
-                                    Customer: {project.customer_id}
-                                    <br/>
-                                    START DATE: {project.start_date}
-                                    <br/>
-                                    END DATE: {project.end_date}
+                                    <strong>END DATE:</strong> {project.end_date.slice(0, 10)}
                                     <br/>
                                 </div>
                             </div>
