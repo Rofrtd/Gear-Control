@@ -41,7 +41,10 @@ export default function AddProject (props){
     }, [true])
 
     return (
-        <div>
+        <div className="container">
+            <center>
+                <h1 className="title">ADD NEW PROJECT</h1>
+            </center>
         <Formik 
             initialValues={{
                 name: '',
@@ -53,45 +56,57 @@ export default function AddProject (props){
             onSubmit={onSubmit(props.history)}
         >
             <Form>
-                <div className="field is-grouped">
-                    <div className="control">
-                        <label className="label">Project name:</label>
-                    </div>
-                    <div className="control">
-                        <Field name="name" className="field input" type="text" placeholder="Project Name" />
-                        <ErrorMessage name="name" />
-                    </div>
-                </div>
-                <div className="field is-grouped">
-                    <div className="control">
-                        <label className="label">Customer:</label>
-                    </div>
-                    <div className="field has-addons">
-                        <div className="control">
-                            <span className="select is-info is-small">
-                                <Field component="select" name="customer">
-                                    <option></option>
-                                    {customers.map((customer) =>(
-                                        <option value={customer.id} key={customer.id}>{customer.name}</option>
-                                    ))}
-                                </Field>
-                            </span>
+
+            <div className="columns">
+                <div className="column">
+                    <div className="columns level">
+                        <label className="label column level-item">Project name:</label>
+                        <div className="control column level-item">
+                            <Field name="name" className="field input" type="text" placeholder="Project Name" />
                         </div>
-                        <div className="control">
-                            <Link to="/add-customer" className="button is-small">Add Customer</Link>
+                        <ErrorMessage name="name"/>
+                    </div>
+                    <div className="columns level">
+                        <label className="label column level-item">Customer:</label>
+                        <div className="field has-addons column level-item">
+                                <span className="select is-info is-small">
+                                    <Field component="select" name="customer">
+                                        <option></option>
+                                        {customers.map((customer) =>(
+                                            <option value={customer.id} key={customer.id}>{customer.name}</option>
+                                        ))}
+                                    </Field>
+                                </span>
+                            <div className="control">
+                                <Link to="/add-customer" className="button is-small">Add Customer</Link>
+                            </div>
+                            <ErrorMessage name="customer" />
                         </div>
                     </div>
-                    <ErrorMessage name="customer" />
+                    <div className="columns level">
+                        <label className="label column level-item">Start Date:</label>
+                        <div className="control column level-item">
+                            <Field  type="date" name="start_date" className="field input" placeholder="Start Date" />
+                        </div>
+                        <ErrorMessage name="start_date" />
+                    </div>
+                    <div className="columns level">
+                        <label className="label column level-item">End Date:</label>
+                        <div className="control column level-item">
+                            <Field type="date" name="end_date" className="field input" placeholder="End Date" />
+                        </div>
+                    </div>
+                        
+
+
                 </div>
-                <div className="field is-grouped">
-                    <label className="label">Start Date:</label>
-                    <Field type="date" name="start_date" placeholder="Start Date" />
-                    <ErrorMessage name="start_date" />
-                </div>
-                <div className="field is-grouped">
-                    <label className="label">End Date:</label>
-                    <Field type="date" name="end_date" placeholder="End Date" />
-                </div>
+                <div className="column"></div>
+
+
+            </div>           
+
+                
+                
                 <button type="submit" className="button is-info" >Submit</button>
             </Form>
         </Formik>
