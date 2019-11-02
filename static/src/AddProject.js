@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Formik, Form, Field, ErrorMessage} from "formik";
+import {Formik, Form, Field, ErrorMessage, FieldArray} from "formik";
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom'
 
@@ -10,6 +10,9 @@ const ProjectSchema = Yup.object().shape({
         .required("Required!"),
     customer: Yup.string()
         .required("Required!"),
+    equipmentIds: Yup.array().of(Yup.string())
+        .min(1, "Select at least one!")
+        
 })
 
 function onSubmit (history) {
@@ -40,11 +43,11 @@ export default function AddProject (props){
         })()
     }, [true])
 
-    const [equipment, setEquipment] = useState([])
+    const [equipments, setEquipments] = useState([])
     useEffect(() => {
         (async () => {
             const response = await fetch('/api/equipment')
-            setEquipment(await response.json())
+            setEquipments(await response.json())
         })()
     }, [true])
 
@@ -59,7 +62,7 @@ export default function AddProject (props){
                 customer:'',
                 start_date:'',
                 end_date: '',
-                equipment: []
+                equipmentIds: []
             }}
             validationSchema={ProjectSchema}
             onSubmit={onSubmit(props.history)}
@@ -108,14 +111,39 @@ export default function AddProject (props){
 
                     <div className="columns level">
                         <label className="label column level-item">Allocate Equipment:</label>
-                        <div className="select is-multiple column level-item">
-                            <select multiple name="equipment" className="field input">
-                            {equipment.map((equipment) =>(
-                                    <option value={equipment.id} key={equipment.id}>{equipment.internal_id}</option>
-                                ))}
-                            </select>
+                        <div className="column level-item">
+                            <FieldArray
+                                name="equipmentIds"
+                                render={arrayHelpers => (
+                                    <div>
+                                    {equipments.map((equipment) => (
+                                        <div key={equipment.id}>
+                                            <label className="label column level-item">
+                                            <input
+                                                name="equipmentIds"
+                                                type="checkbox"
+                                                value={equipment.id}
+                                                checked={arrayHelpers.form.values.equipmentIds.includes(equipment.id)}
+                                                onChange={e => {
+                                                    if (e.target.checked) arrayHelpers.push(equipment.id);
+                                                    else {
+                                                        const idx = arrayHelpers.form.values.equipmentIds.indexOf(equipment.id);
+                                                        arrayHelpers.remove(idx);
+                                                    }
+                                                }}
+                                            />
+
+        
+                                                {" "} {equipment.internal_id}
+                                            </label>
+                                        </div>
+                                        ))}
+                                    </div>
+                                    
+                                )}/>
+
                         </div>
-                        {/* <ErrorMessage name="equipment"/> */}
+                        <ErrorMessage name="equipmentIds"/>
                     </div>
                 </div>
                 <div className="column"> {/* EMPTY */}</div>
