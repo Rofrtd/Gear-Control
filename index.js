@@ -18,21 +18,38 @@ app.get('/api/projects', async (req, res) => {
 });
 
 app.post('/api/add-project', async (req, res) => {
-   try {
+    const trx = await knex.transaction();
+    const uId = uuidv1()
+
+    try{
         await knex('projects').insert({
-            id: uuidv1(),
+            id: uId,
             name: req.body.name,
             customer_id: req.body.customer,
             start_date: req.body.start_date,
             end_date: req.body.end_date
         })
-    
+
+        await Promise.all(req.body.equipmentIds.map((equipmentId) =>{
+            return trx('equipment_allocation')
+                .insert({
+                    project_id: uId,
+                    equipment_id: equipmentId
+                })
+
+        }))
+
+        await trx.commit();
+        console.log(req.body)
         res.json({ message: "OK" });
-   } catch(error){   
+    } catch(error) {
+        trx.rollback()   
         console.log(error)
         res.status(500).json({ message: error.message })
-   }
-})
+   
+    }
+
+    })
 
 app.get('/api/customers', async (req, res) => {
     res.json((await knex('customers')))
