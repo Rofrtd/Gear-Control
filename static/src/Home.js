@@ -10,6 +10,14 @@ export default function Home() {
             setProjects(await response.json())
         })()
     }, [true])
+
+    const [allocation, setAllocation] = useState([])
+    useEffect(() => {
+        (async () => {
+            const response = await fetch('/api/equipment_allocation')
+            setAllocation(await response.json())
+        })()
+    }, [true])
     
     
     return (
@@ -32,6 +40,11 @@ export default function Home() {
                                     <br/>
                                     <strong>END DATE:</strong> {project.end_date.slice(0, 10)}
                                     <br/>
+                                    <strong>Equipment:</strong> {
+                                        allocation
+                                            .filter((e)=> e.project_id == project.id)
+                                            .map((e, i)=><span key={i}> {e.equipment_id} <br/> </span> )
+                                    }
                                 </div>
                             </div>
                             <footer className="card-footer">
