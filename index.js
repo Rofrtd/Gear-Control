@@ -36,12 +36,12 @@ app.post('/api/add-project', async (req, res) => {
                     project_id: uId,
                     equipment_id: equipmentId
                 })
-
         }))
 
         await trx.commit();
         console.log(req.body)
         res.json({ message: "OK" });
+        
     } catch(error) {
         trx.rollback()   
         console.log(error)
@@ -50,6 +50,17 @@ app.post('/api/add-project', async (req, res) => {
     }
 
     })
+
+app.get('/api/edit-project/:projectId', async (req, res) => {
+    res.json((await knex('projects')
+        .where({id: req.params.projectId})
+        .select('*')))
+        console.log(req.params.projectId)
+});
+    
+app.get('/api/equipment_allocation', async (req, res) => {
+    res.json((await knex('equipment_allocation')))
+});
 
 app.get('/api/customers', async (req, res) => {
     res.json((await knex('customers')))
