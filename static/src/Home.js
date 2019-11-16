@@ -1,5 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { parse } from 'path';
+
+function parseDate(isoDate){
+    const date = new Date(isoDate)
+    const year = date.getFullYear()
+    const month = `${date.getMonth() + 1}`.padStart(2, '0')
+    const day = `${date.getDate()}`.padStart(2, '0')
+    const test = `${year}-${month}-${day}`
+    console.log(test, isoDate)
+    return test
+}
 
 export default function Home() {
     const [projects, setProjects] = useState([])
@@ -10,7 +21,7 @@ export default function Home() {
             setProjects(await response.json())
         })()
     }, [true])
-
+    console.log(projects)
     const [allocation, setAllocation] = useState([])
     useEffect(() => {
         (async () => {
@@ -36,9 +47,9 @@ export default function Home() {
                                 <div className="content">
                                     <strong>Customer:</strong> {project.customer_id} 
                                     <br/>
-                                    <strong>START DATE:</strong> {project.start_date.slice(0, 10)}
+                                    <strong>START DATE:</strong> {parseDate(project.start_date)}
                                     <br/>
-                                    <strong>END DATE:</strong> {project.end_date.slice(0, 10)}
+                                    <strong>END DATE:</strong> {parseDate(project.end_date)}
                                     <br/>
                                     <strong>Equipment:</strong> {
                                         allocation
@@ -48,7 +59,7 @@ export default function Home() {
                                 </div>
                             </div>
                             <footer className="card-footer">
-                                <a href="#" className="card-footer-item">Edit</a>
+                                <Link to={`/edit-project/${project.id}`} className="card-footer-item">Edit</Link>
                                 <a href="#" className="card-footer-item">Close</a>
                             </footer>
                             </div>
