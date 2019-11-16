@@ -3,6 +3,15 @@ import {Formik, Form, Field, ErrorMessage, FieldArray} from "formik";
 import * as Yup from 'yup';
 import { Link } from 'react-router-dom'
 
+function parseDate(isoDate){
+    const date = new Date(isoDate)
+    const year = date.getFullYear()
+    const month = `${date.getMonth() + 1}`.padStart(2, '0')
+    const day = `${date.getDate()}`.padStart(2, '0')
+    const test = `${year}-${month}-${day}`
+    console.log(test, isoDate)
+    return test
+}
 const ProjectSchema = Yup.object().shape({
     name: Yup.string()
         .min(2, "Too short!")
@@ -15,24 +24,26 @@ const ProjectSchema = Yup.object().shape({
         
 })
 
-// function onSubmit (history) {
-//     return async (values) => {
-//         const response = await fetch(`/api/edit-project`, {
-//             method: 'PUT', 
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify(values)
-//         })
+function onSubmit (history) {
+    return async (values) => {
+    //     const response = await fetch(`/api/edit-project/`, {
+    //         method: 'PUT', 
+    //         headers: {
+    //             'Content-Type': 'application/json',
+    //         },
+    //         body: JSON.stringify(values)
+    //     })
 
-//         if(response.ok){
-//             history.push("/")
-//         } else {
-//             console.log(await response.json());
-//             alert("Project not updated!")
-//         }
-//     }
-// }
+    //     if(response.ok){
+    //         history.push("/")
+    //     } else {
+    //         console.log(await response.json());
+    //         alert("Project not updated!")
+    //     }
+    console.log(values, history)
+    }
+    
+}
 
 export default function EditProject (props){
     const {match: { params }} = props
@@ -44,7 +55,22 @@ export default function EditProject (props){
             
         })()
     }, [true])
-    
+
+    const [customers, setCustomers] = useState([])
+    useEffect(() => {
+        (async () => {
+            const response = await fetch('/api/customers')
+            setCustomers(await response.json())
+        })()
+    }, [true])
+
+    const [equipments, setEquipments] = useState([])
+    useEffect(() => {
+        (async () => {
+            const response = await fetch('/api/equipment')
+            setEquipments(await response.json())
+        })()
+    }, [true])
 
     return (
         <div className="container">
@@ -52,10 +78,16 @@ export default function EditProject (props){
                 <h1 className="title">EDIT PROJECT</h1>
             </center>
         <Formik 
-            initialValues={props}
+            initialValues={{
+                name: project.name || "",
+                customer: project.customer_id,
+                start_date: parseDate(project.start_date),
+                end_date: parseDate(project.end_date),
+
+            }}
             enableReinitialize={true}
             validationSchema={ProjectSchema}
-            // onSubmit={onSubmit(props.history)}
+            onSubmit={onSubmit(props.history, props.match.params.projectID)}
         >
             <Form>
 
@@ -74,7 +106,7 @@ export default function EditProject (props){
                                 <span className="select is-info is-small">
                                     <Field component="select" name="customer">
                                         <option></option>
-                                        {project.map((customer) =>(
+                                        {customers.map((customer) =>(
                                             <option value={customer.id} key={customer.id}>{customer.name}</option>
                                         ))}
                                     </Field>
@@ -88,7 +120,7 @@ export default function EditProject (props){
                     <div className="columns level">
                         <label className="label column level-item">Start Date:</label>
                         <div className="control column level-item">
-                            <Field  type="date" name="start_date" className="field input" placeholder="Start Date" />
+                            <Field type="date" name="start_date" className="field input" placeholder="Start Date" />
                         </div>
                         <ErrorMessage name="start_date" />
                     </div>
@@ -99,14 +131,14 @@ export default function EditProject (props){
                         </div>
                     </div>
 
-                    <div className="columns level">
+                    {/* <div className="columns level">
                         <label className="label column level-item">Allocate Equipment:</label>
                         <div className="column level-item">
                             <FieldArray
                                 name="equipmentIds"
                                 render={arrayHelpers => (
                                     <div>
-                                    {/* {equipments.map((equipment) => (
+                                    {equipments.map((equipment) => (
                                         <div key={equipment.id}>
                                             <label className="label column level-item">
                                             <input
@@ -127,16 +159,16 @@ export default function EditProject (props){
                                                 {" "} {equipment.internal_id}
                                             </label>
                                         </div>
-                                        ))} */}
+                                        ))}
                                     </div>
                                     
                                 )}/>
 
                         </div>
                         <ErrorMessage name="equipmentIds"/>
-                    </div>
+                    </div> */}
                 </div>
-                <div className="column"> {/* EMPTY */}</div>
+                <div className="column"> </div>
             </div>           
                 <button type="submit" className="button is-info" >Submit</button>
             </Form>
