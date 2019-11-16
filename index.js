@@ -54,7 +54,8 @@ app.post('/api/add-project', async (req, res) => {
 app.get('/api/edit-project/:projectId', async (req, res) => {
     res.json((await knex('projects')
         .where({id: req.params.projectId})
-        .select('*')))
+        .first()))
+
         console.log(req.params.projectId)
 });
     
