@@ -19,9 +19,8 @@ const ProjectSchema = Yup.object().shape({
         .min(2, "Too short!")
         .max(25, "Too long!")
         .required("Required!"),
-    equipment_last_calibration_date: Yup.string()
-        .min(2, "Too short!")
-        .max(25, "Too long!")
+    equipment_last_calibration_date: Yup.date()
+        .max(new Date(), "Invalid date")
         .required("Required!"),
     equipment_calibration_period: Yup.string()
         .min(2)
@@ -39,7 +38,7 @@ function onSubmit (history) {
         })
 
         if(response.ok){
-            history.push("/add-project")
+            history.push("/add-equipment")
         } else {
             console.log(await response.json());
             alert("Equipment not added!")
@@ -56,7 +55,7 @@ export default function AddEquipment (props){
             setEquipment(await response.json())
         })()
     }, [true])
-
+    console.log(equipment)
     return (
         <div className="container">
 				<h1 className="title">ADD NEW EQUIPMENT</h1>
@@ -132,10 +131,12 @@ export default function AddEquipment (props){
 									
 							</div>
 							<div className="columns level">
-								<div className="checkbox column level-item">
-									<Field type="checkbox" value="equipment_calibration_notification" name="equipment_calibration_notification"/>
-								</div> 
-								<label className="label column level-item">Receive calibration notification</label>
+                                <label className="label column level-item">
+                                    <div className="checkbox column level-item">
+                                        <Field type="checkbox" value="equipment_calibration_notification" name="equipment_calibration_notification"/>
+                                        {" "} Receive calibration notification
+                                    </div> 
+                                </label>
 							</div>
 						</div>
                     </div>
