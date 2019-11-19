@@ -52,11 +52,51 @@ app.post('/api/add-project', async (req, res) => {
     })
 
 app.get('/api/edit-project/:projectId', async (req, res) => {
-    res.json((await knex('projects')
-        .where({id: req.params.projectId})
-        .first()))
+    try { 
+        const data = await knex.raw(`select
+                projects.*, customers.name as customer_name, equipment_allocation.equipment_id, equipment.internal_id
+            from 
+                projects
+            left join
+                customers on projects.customer_id = customers.id 
+            left join 
+                equipment_allocation on projects.id = equipment_allocation.project_id
+            left join
+                equipment on equipment_allocation.equipment_id = equipment.id
+            where 
+                projects.id = ?
+            `, [req.params.projectId])
+            console.log(data.rows)
+        // const data2 = await knex.raw(
+        // )
 
-        console.log(req.params.projectId)
+            let project = {
+                id: data.rows[0].id,
+                name: data.rows[0].name,
+                created_on: data.rows[0].created_on,
+                customer_id: data.rows[0].customer_id,
+                start_date: data.rows[0].start_date,
+                end_date: data.rows[0].end_date,
+                customer_name: data.rows[0].customer_name,
+                equipment: [{
+                    id: data.rows[0].equipment_id,
+                    internal_id: data.rows[0].internal_id
+                }]
+            }
+            
+            for(let i = 1; i < data.rows.length; i++){
+                project.equipment.push({
+                    id: data.rows[i].equipment_id, 
+                    internal_id: data.rows[i].internal_id 
+                })
+            }
+            console.log(project)
+                res.json({project, equipment: []})
+        }
+    catch(error) {
+        console.log(error)
+         res.status(500).json({ message: error.message })
+    }
 });
     
 app.get('/api/equipment_allocation', async (req, res) => {
