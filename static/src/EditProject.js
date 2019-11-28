@@ -9,7 +9,6 @@ function parseDate(isoDate){
     const month = `${date.getMonth() + 1}`.padStart(2, '0')
     const day = `${date.getDate()}`.padStart(2, '0')
     const test = `${year}-${month}-${day}`
-    console.log(test, isoDate)
     return test
 }
 const ProjectSchema = Yup.object().shape({
@@ -40,7 +39,7 @@ function onSubmit (history) {
     //         console.log(await response.json());
     //         alert("Project not updated!")
     //     }
-    console.log(values, history)
+    // console.log(values, history)
     }
     
 }
@@ -48,22 +47,14 @@ function onSubmit (history) {
 export default function EditProject (props){
     const {match: { params }} = props
     const [project, setProject] = useState([])
+    const customer = project.customer_name  
     useEffect(() => {
         (async () => {
             const response = await fetch(`/api/edit-project/${params.projectId}`)
-            setProject(await response.json())
-            
+            setProject(await response.json().then(data => data.project))
         })()
     }, [true])
-
-    const [customers, setCustomers] = useState([])
-    useEffect(() => {
-        (async () => {
-            const response = await fetch('/api/customers')
-            setCustomers(await response.json())
-        })()
-    }, [true])
-
+    console.log(project)
     const [equipments, setEquipments] = useState([])
     useEffect(() => {
         (async () => {
@@ -72,7 +63,15 @@ export default function EditProject (props){
         })()
     }, [true])
 
-    return (
+    // const [allocation, setAllocation] = useState([])
+    // useEffect(() => {
+    //     (async () => {
+    //         const response = await fetch('/api/equipment_allocation')
+    //         setAllocation(await response.json())
+            
+    //     })()
+    // }, [true])
+   return (
         <div className="container">
             <center>
                 <h1 className="title">EDIT PROJECT</h1>
@@ -80,10 +79,10 @@ export default function EditProject (props){
         <Formik 
             initialValues={{
                 name: project.name || "",
-                customer: project.customer_id,
+                customer: project.customer_name,
                 start_date: parseDate(project.start_date),
                 end_date: parseDate(project.end_date),
-
+                equipmentIds: []
             }}
             enableReinitialize={true}
             validationSchema={ProjectSchema}
@@ -104,16 +103,10 @@ export default function EditProject (props){
                         <label className="label column level-item">Customer:</label>
                         <div className="field has-addons column level-item">
                                 <span className="select is-info is-small">
-                                    <Field component="select" name="customer">
-                                        <option></option>
-                                        {customers.map((customer) =>(
-                                            <option value={customer.id} key={customer.id}>{customer.name}</option>
-                                        ))}
+                                    <Field component="select" name="customer" disabled>
+                                        <option>{customer}</option>
                                     </Field>
                                 </span>
-                            <div className="control">
-                                <Link to="/add-customer" className="button is-small">Add Customer</Link>
-                            </div>
                             <ErrorMessage name="customer" />
                         </div>
                     </div>
@@ -131,7 +124,7 @@ export default function EditProject (props){
                         </div>
                     </div>
 
-                    {/* <div className="columns level">
+                    <div className="columns level">
                         <label className="label column level-item">Allocate Equipment:</label>
                         <div className="column level-item">
                             <FieldArray
@@ -143,7 +136,7 @@ export default function EditProject (props){
                                             <label className="label column level-item">
                                             <input
                                                 name="equipmentIds"
-                                                type="checkbox"
+                                                type="checkbox"    
                                                 value={equipment.id}
                                                 checked={arrayHelpers.form.values.equipmentIds.includes(equipment.id)}
                                                 onChange={e => {
@@ -166,7 +159,7 @@ export default function EditProject (props){
 
                         </div>
                         <ErrorMessage name="equipmentIds"/>
-                    </div> */}
+                    </div>
                 </div>
                 <div className="column"> </div>
             </div>           
