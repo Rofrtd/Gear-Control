@@ -9,7 +9,7 @@
 
 **TODO**: Check codeclimate issues and write tests for the existing features.
 
-🔵🔵🔵🔵⚪️⚪️⚪️⚪️⚪️⚪️100%
+🔵🔵🔵🔵🔵🔵⚪️⚪️⚪️⚪️100%
 
 - [x] Setup Project
 - [x] Setup CI
