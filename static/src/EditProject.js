@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {Formik, Form, Field, ErrorMessage, FieldArray} from "formik";
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom'
 
 function parseDate(isoDate){
     const date = new Date(isoDate)
@@ -23,30 +22,30 @@ const ProjectSchema = Yup.object().shape({
         
 })
 
-function onSubmit (history) {
+function onSubmit (history, projectId) {
     return async (values) => {
-    //     const response = await fetch(`/api/edit-project/`, {
-    //         method: 'PUT', 
-    //         headers: {
-    //             'Content-Type': 'application/json',
-    //         },
-    //         body: JSON.stringify(values)
-    //     })
+        const response = await fetch(`/api/edit-project/${projectId}`, {
+            method: 'PUT', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(values)
+        })
 
-    //     if(response.ok){
-    //         history.push("/")
-    //     } else {
-    //         console.log(await response.json());
-    //         alert("Project not updated!")
-    //     }
-    // console.log(values, history)
+        if(response.ok){
+            history.push("/")
+        } else {
+            console.log(await response.json());
+            alert("Project not updated!")
+        }
+    console.log(values, history)
     }
     
 }
 
 export default function EditProject (props){
     const {match: { params }} = props
-    const [project, setProject] = useState([])
+    const [project, setProject] = useState({equipment:[]})
     const customer = project.customer_name  
     useEffect(() => {
         (async () => {
@@ -55,6 +54,7 @@ export default function EditProject (props){
         })()
     }, [true])
     console.log(project)
+
     const [equipments, setEquipments] = useState([])
     useEffect(() => {
         (async () => {
@@ -63,14 +63,6 @@ export default function EditProject (props){
         })()
     }, [true])
 
-    // const [allocation, setAllocation] = useState([])
-    // useEffect(() => {
-    //     (async () => {
-    //         const response = await fetch('/api/equipment_allocation')
-    //         setAllocation(await response.json())
-            
-    //     })()
-    // }, [true])
    return (
         <div className="container">
             <center>
@@ -82,11 +74,11 @@ export default function EditProject (props){
                 customer: project.customer_name,
                 start_date: parseDate(project.start_date),
                 end_date: parseDate(project.end_date),
-                equipmentIds: []
+                equipmentIds: project.equipment.map(e => e.id)
             }}
             enableReinitialize={true}
             validationSchema={ProjectSchema}
-            onSubmit={onSubmit(props.history, props.match.params.projectID)}
+            onSubmit={onSubmit(props.history, params.projectId)}
         >
             <Form>
 

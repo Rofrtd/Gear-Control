@@ -66,9 +66,6 @@ app.get('/api/edit-project/:projectId', async (req, res) => {
             where 
                 projects.id = ?
             `, [req.params.projectId])
-            console.log(data.rows)
-        // const data2 = await knex.raw(
-        // )
 
             let project = {
                 id: data.rows[0].id,
@@ -90,12 +87,58 @@ app.get('/api/edit-project/:projectId', async (req, res) => {
                     internal_id: data.rows[i].internal_id 
                 })
             }
-            console.log(project)
                 res.json({project, equipment: []})
         }
     catch(error) {
         console.log(error)
          res.status(500).json({ message: error.message })
+    }
+});
+
+app.put('/api/edit-project/:projectId', async (req, res) => {
+    const trx = await knex.transaction();
+    
+    try {
+        await trx.raw(`
+            UPDATE 
+                projects 
+            SET 
+                name= ?,
+                start_date= ?,
+                end_date= ?
+            WHERE
+                id = ?;
+            `, [
+                req.body.name,
+                req.body.start_date, 
+                req.body.end_date, 
+                req.params.projectId
+            ])
+
+        await trx.raw(`
+            DELETE FROM
+                equipment_allocation
+            WHERE
+                project_id = ?;
+            `,[req.params.projectId])
+        
+        await Promise.all(req.body.equipmentIds.map((equipmentId) =>{
+            return trx.raw(`
+                INSERT INTO
+                    equipment_allocation
+                    (project_id, equipment_id)    
+                VALUES
+                    (?, ?);
+            `, [req.params.projectId, equipmentId])
+        }))
+    
+        await trx.commit();
+        res.json({ message: "OK" })
+    }
+    catch(error) {
+        trx.rollback()  
+        console.log(error)
+        res.status(500).json({ message: error.message })
     }
 });
     
