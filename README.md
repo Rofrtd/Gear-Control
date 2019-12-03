@@ -21,11 +21,11 @@
 - [x] Project - List
 - [x] Project - Create
 - [x] Project - Allocate Equipment
-- [ ] Project - Update
+- [x] Project - Update
 - [x] Equipment - Create
 - [ ] Equipment - Update
 - [ ] Equipment Conflict Notification
-- [ ] PM Login
+- [x] PM Login
 - [ ] Register DNS
 
 ## Stack
@@ -51,6 +51,7 @@ SPA built with **React** with an API written in **NodeJS** running **Postgress**
 **TODO**: Create a single command to run `build-watch` and `start-dev`
 
 ```shell
+cp .env-sample .env
 nvm use
 npm install
 npx knex migrate:latest
