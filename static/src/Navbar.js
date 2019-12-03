@@ -20,7 +20,6 @@ export default function Navbar() {
                 <div id="navbar-menu" className="navbar-menu">
                     <Link to="/" className="navbar-item">Home</Link>
                     <Link to="/add-equipment" className="navbar-item">Equipment</Link>
-                    <Link to="/" className="navbar-item">Users</Link>
                     <Link to="/" className="navbar-item">
                             <i className="fas fa-bell"></i> 
                     </Link>

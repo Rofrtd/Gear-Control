@@ -4,20 +4,55 @@ const app = express()
 const port = process.env.PORT || 3000
 const uuidv1 = require('uuid/v1');
 const bodyParser = require('body-parser')
+const jwt = require('jsonwebtoken')
+const cookieParser = require('cookie-parser')
 
 const knex = require('knex')({
     client: 'pg',
     connection: process.env.DATABASE_URL || 'postgresql://postgres:@localhost:5432/gear-control'
 })
 
-app.use(express.static('public'))
 app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
 
-app.get('/api/projects', async (req, res) => {
+app.get('/index.html', appAuth, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
+
+app.get('/', appAuth, (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
+
+app.use(express.static('public'))
+
+function appAuth(req, res, next) {
+    try {
+        jwt.verify(req.cookies.access_token, 'abc');
+        next()
+    } catch(err) {
+        return res.redirect(307, '/login')
+    }
+}
+
+function apiAuth(req, res, next) {
+    try {
+        jwt.verify(req.cookies.access_token, 'abc');
+        next()
+    } catch(err) {
+        return res.status(401).json({ message: 'UNAUTHORISED!' })
+    }
+}
+
+const apiRouter = express.Router()
+
+apiRouter.use(apiAuth)
+
+apiRouter.get('/projects', async (req, res) => {
     res.json((await knex('projects')))
 });
 
-app.post('/api/add-project', async (req, res) => {
+apiRouter.post('/add-project', async (req, res) => {
     const trx = await knex.transaction();
     const uId = uuidv1()
 
@@ -49,9 +84,9 @@ app.post('/api/add-project', async (req, res) => {
    
     }
 
-    })
+})
 
-app.get('/api/edit-project/:projectId', async (req, res) => {
+apiRouter.get('/edit-project/:projectId', async (req, res) => {
     try { 
         const data = await knex.raw(`select
                 projects.*, customers.name as customer_name, equipment_allocation.equipment_id, equipment.internal_id
@@ -95,7 +130,7 @@ app.get('/api/edit-project/:projectId', async (req, res) => {
     }
 });
 
-app.put('/api/edit-project/:projectId', async (req, res) => {
+apiRouter.put('/edit-project/:projectId', async (req, res) => {
     const trx = await knex.transaction();
     
     try {
@@ -142,15 +177,15 @@ app.put('/api/edit-project/:projectId', async (req, res) => {
     }
 });
     
-app.get('/api/equipment_allocation', async (req, res) => {
+apiRouter.get('/equipment_allocation', async (req, res) => {
     res.json((await knex('equipment_allocation')))
 });
 
-app.get('/api/customers', async (req, res) => {
+apiRouter.get('/customers', async (req, res) => {
     res.json((await knex('customers')))
 });
 
-app.post('/api/add-customer', async (req, res) => {
+apiRouter.post('/add-customer', async (req, res) => {
     try {
          await knex('customers').insert({
              id: uuidv1(),
@@ -168,11 +203,11 @@ app.post('/api/add-customer', async (req, res) => {
     }
  })
 
- app.get('/api/equipment', async (req, res) => {
+apiRouter.get('/equipment', async (req, res) => {
     res.json((await knex('equipment')))
 });
 
-app.post('/api/add-equipment', async (req, res) => {
+apiRouter.post('/add-equipment', async (req, res) => {
    try {
         await knex('equipment').insert({
             id: uuidv1(),
@@ -192,7 +227,26 @@ app.post('/api/add-equipment', async (req, res) => {
    }
 })
 
-app.get(/^((?!\/api).)*$/, (req, res) => {
+app.post(`/login`, async(req, res) => {
+    if(req.body.username == process.env.ADMIN_USERNAME && req.body.password == process.env.ADMIN_PASSWORD){
+        const token = jwt.sign({ }, 'abc');
+        res.status(201)
+        .cookie('access_token', token, {
+            expires: new Date(Date.now() + 8 * 3600000) // cookie will be removed after 8 hours
+        })
+        .redirect(301, '/')
+    } else {
+        res.redirect(301, '/login')
+    }
+})
+
+app.get('/login', async(req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'login.html'))
+})
+
+app.use('/api', apiRouter)
+
+app.get(/^((?!\/api).)*$/, appAuth, (req, res) => {
     //falls back 404 to index.html so that SPA handles 404 pages
     res.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
