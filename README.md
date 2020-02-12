@@ -20,11 +20,13 @@
 - [ ] Customer - Update
 - [x] Project - List
 - [x] Project - Create
+- [ ] Project - Close
 - [x] Project - Allocate Equipment
 - [x] Project - Update
 - [x] Equipment - Create
 - [ ] Equipment - Update
 - [ ] Equipment Conflict Notification
+- [ ] Reports - Customer/Project/Equipment
 - [x] PM Login
 - [ ] Register DNS
 
