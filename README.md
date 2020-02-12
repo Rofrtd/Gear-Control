@@ -5,7 +5,11 @@
 ## Summary
 :gear: Gear Control helps Project Managers to allocate resources shared across different projects. 
 
-:construction: [Work in progress](https://gear-control.herokuapp.com) :construction:
+:construction: [Work in progress](https://gear-control.herokuapp.com) :construction: 
+:construction:
+Username: admin
+Password: admin
+:construction:
 
 **TODO**: Check codeclimate issues and write tests for the existing features.
 
